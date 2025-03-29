@@ -1,10 +1,13 @@
 import { useState } from "react";
+import axios from "axios";
 
 const BuyerLogin = () => {
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
+
+  const [message, setMessage] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginData({
@@ -13,9 +16,19 @@ const BuyerLogin = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Login Data:", { ...loginData, password: "****" }); // Masked password
+    setMessage(null);
+
+    try {
+      const response = await axios.post("http://localhost:3000/api/auth/Buyers/login", loginData);
+      localStorage.setItem("buyerToken", response.data.token); // Store token for future requests
+      setMessage(response.data.message); // Show success message
+      setLoginData({ email: "", password: "" }); // Reset form
+      window.location.href = "/"; // Redirect to home page
+    } catch (error: any) {
+      setMessage(error.response?.data?.message || "Invalid credentials");
+    }
   };
 
   return (
@@ -25,6 +38,12 @@ const BuyerLogin = () => {
         className="bg-white p-6 rounded-2xl shadow-md w-96"
       >
         <h2 className="text-2xl font-bold text-center mb-4">Buyer Login</h2>
+
+        {message && (
+          <p className={`text-center mb-3 ${message.includes("successfully") ? "text-green-600" : "text-red-600"}`}>
+            {message}
+          </p>
+        )}
 
         <input 
           type="email" 

@@ -1,0 +1,70 @@
+import { Request, Response } from "express";
+import Order from "../../models/Orders";
+
+// Create Order
+export const createOrder = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const { buyer, seller, liters } = req.body;
+
+    if (!buyer || !seller || !liters) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    const newOrder = new Order({ buyer, seller, liters });
+    await newOrder.save();
+
+    res.status(201).json({ message: "Order created successfully", order: newOrder });
+  } catch (error) {
+    res.status(500).json({ message: "Error creating order", error });
+  }
+};
+
+// Get Orders by Buyer
+export const getBuyerOrders = async (req: Request, res: Response): Promise<any>  => {
+  try {
+    const { buyer } = req.body;
+    if (!buyer) return res.status(400).json({ message: "Buyer ID is required" });
+
+    const orders = await Order.find({ buyer }).populate("seller");
+    res.status(200).json(orders);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching buyer's orders", error });
+  }
+};
+
+// Get Orders by Seller
+export const getSellerOrders = async (req: Request, res: Response) : Promise<any>  => {
+  try {
+    const { seller } = req.body;
+    if (!seller) return res.status(400).json({ message: "Seller ID is required" });
+
+    const orders = await Order.find({ seller }).populate("buyer");
+    res.status(200).json(orders);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching seller's orders", error });
+  }
+};
+
+// Get All Orders
+export const getAllOrders = async (req: Request, res: Response): Promise<any>  => {
+  try {
+    const orders = await Order.find({}).populate("buyer seller");
+    res.status(200).json(orders);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching all orders", error });
+  }
+};
+
+// Delete Order
+export const deleteOrder = async (req: Request, res: Response) : Promise<any>  => {
+  try {
+    const { id } = req.params;
+    const order = await Order.findByIdAndDelete(id);
+
+    if (!order) return res.status(404).json({ message: "Order not found" });
+
+    res.status(200).json({ message: "Order deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting order", error });
+  }
+};

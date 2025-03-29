@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 const BuyerRegister = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,8 @@ const BuyerRegister = () => {
     password: "",
   });
 
+  const [message, setMessage] = useState<string | null>(null); // Success/Error messages
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -16,9 +19,19 @@ const BuyerRegister = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Buyer Data:", { ...formData, password: "****" }); // Masked password
+    setMessage(null); // Reset message
+
+    try {
+      const response = await axios.post("http://localhost:3000/api/auth/Buyers/register", formData);
+      localStorage.setItem("Buyertoken", response.data.token); 
+      setMessage(response.data.message); // Success message
+      window.location.href = "/"; 
+    } catch (error: any) {
+      console.log(error)
+      setMessage(error.response?.data?.message || "Something went wrong"); // Error message
+    }
   };
 
   return (
@@ -28,6 +41,12 @@ const BuyerRegister = () => {
         className="bg-white p-6 rounded-2xl shadow-md w-96"
       >
         <h2 className="text-2xl font-bold text-center mb-4">Buyer Registration</h2>
+
+        {message && (
+          <p className={`text-center mb-3 ${message.includes("successfully") ? "text-green-600" : "text-red-600"}`}>
+            {message}
+          </p>
+        )}
 
         <input 
           type="text" 
