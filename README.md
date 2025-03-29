@@ -1,4 +1,4 @@
-# ⛽ FuelStation - Because Who Needs Real Fuel When You Have Code? 🚀
+# ⛽ FuelStation - Who Needs Fuel When You Have Code? 
 
 Welcome to **FuelStation**, the revolutionary (not really) fuel marketplace that exists solely because I was bored one weekend. This project proves you can build anything with enough caffeine and questionable life choices. 
 
