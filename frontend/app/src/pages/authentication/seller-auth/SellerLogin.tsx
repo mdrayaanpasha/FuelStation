@@ -25,6 +25,7 @@ const SellerLogin = () => {
     try {
       const response = await axios.post("http://localhost:3000/api/auth/Sellers/login", loginData);
       setMessage({ type: 'success', content: response.data.message });
+      localStorage.removeItem("buyerToken");
       localStorage.setItem("sellerToken", response.data.token);
       
       setTimeout(() => {

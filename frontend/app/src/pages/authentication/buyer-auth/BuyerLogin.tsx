@@ -32,6 +32,8 @@ const BuyerAuth = () => {
     try {
       const response = await axios.post(endpoint, formData);
       localStorage.setItem("buyerToken", response.data.token);
+      localStorage.removeItem("sellerToken");
+
       setMessage({ type: 'success', content: response.data.message });
       
       setTimeout(() => {

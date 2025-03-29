@@ -28,6 +28,7 @@ const SellerRegister = () => {
     try {
       const response = await axios.post("http://localhost:3000/api/auth/Sellers/register", formData);
       localStorage.setItem("sellertoken", response.data.token);
+      localStorage.removeItem("buyerToken");
       setMessage({ type: 'success', content: response.data.message });
       
       setTimeout(() => {

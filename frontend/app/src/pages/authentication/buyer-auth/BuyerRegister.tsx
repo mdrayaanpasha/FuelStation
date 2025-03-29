@@ -27,6 +27,8 @@ const BuyerRegister = () => {
     try {
       const response = await axios.post("http://localhost:3000/api/auth/Buyers/register", formData);
       localStorage.setItem("Buyertoken", response.data.token);
+      localStorage.removeItem("sellerToken");
+
       setMessage({ type: 'success', content: response.data.message });
       setTimeout(() => window.location.href = "/", 1500);
     } catch (error: any) {
