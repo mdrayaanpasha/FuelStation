@@ -154,7 +154,7 @@ const BuyerAuth = () => {
 
                 <button
                   type="submit"
-                  onClick={e=>window.location.href="./buyer-register"}
+                  onClick={e=>handleSubmit(e)}
                   className="w-full bg-gradient-to-br from-gray-900 to-gray-800 text-white py-4 px-6 rounded-lg font-semibold hover:opacity-90 transition-opacity"
                 >
                   {isLogin ? "Sign In" : "Create Account"}

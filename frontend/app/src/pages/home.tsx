@@ -1,8 +1,9 @@
-import { FiArrowRight, FiCheck, FiDollarSign, FiTruck, FiShield, FiPercent, FiClock } from 'react-icons/fi';
+import { FiArrowRight, FiCheck, FiDollarSign, FiTruck, FiShield, FiPercent, FiClock, FiUser, FiBriefcase, FiShoppingCart, FiFileText } from 'react-icons/fi';
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white">
+ 
       {/* Navigation */}
       <nav className="sticky top-0 bg-white/80 backdrop-blur-md border-b z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,18 +18,17 @@ export default function LandingPage() {
                 <a href="./about" className="text-gray-600 hover:text-black">Our Story</a>
               </div>
             </div>
-            {!localStorage.getItem('buyertoken') || !localStorage.getItem("sellerToken") && (
+            {!localStorage.getItem('buyertoken') && !localStorage.getItem("sellerToken") && (
             <button className="bg-black text-white px-6 py-2 rounded-full hover:bg-blue-700 transition" onClick={e=>window.location.href="./auth/authenticate"}>
               Sign In
             </button>
             )}
-            
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-blue-50 to-white">
+      <section className="relative flex items-center justify-center flex-col h-[90vh] ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
             <h1 className="text-5xl font-bold text-gray-900 mb-6">
@@ -49,6 +49,73 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+      <hr className="border-t border-gray-200 w-4/5 mx-auto my-5" />
+      {/* Quick Links Section */}
+      <section className="py-16 ">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center mb-12">Quick Access</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Buyer Links */}
+            <a 
+              href="./order" 
+              className="bg-white p-6 rounded-xl border border-gray-100 hover:border-gray-300 transition-all flex items-center gap-4"
+            >
+              <div className="p-3 bg-blue-50 rounded-lg">
+                <FiShoppingCart className="w-6 h-6 text-blue-600" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold">Place Order</h3>
+                <p className="text-gray-600 text-sm">Buy fuel instantly</p>
+              </div>
+            </a>
+
+            <a 
+              href="./myorders" 
+              className="bg-white p-6 rounded-xl border border-gray-100 hover:border-gray-300 transition-all flex items-center gap-4"
+            >
+              <div className="p-3 bg-green-50 rounded-lg">
+                <FiFileText className="w-6 h-6 text-green-600" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold">My Orders</h3>
+                <p className="text-gray-600 text-sm">Track your purchases</p>
+              </div>
+            </a>
+
+
+
+            {/* Seller Links */}
+            <a 
+              href="./customer-orders" 
+              className="bg-white p-6 rounded-xl border border-gray-100 hover:border-gray-300 transition-all flex items-center gap-4"
+            >
+              <div className="p-3 bg-purple-50 rounded-lg">
+                <FiBriefcase className="w-6 h-6 text-purple-600" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold">Manage Orders</h3>
+                <p className="text-gray-600 text-sm">View customer requests</p>
+              </div>
+            </a>
+
+            {/* Auth Links */}
+            <a 
+              href="./auth/authenticate" 
+              className="bg-white p-6 rounded-xl border border-gray-100 hover:border-gray-300 transition-all flex items-center gap-4"
+            >
+              <div className="p-3 bg-orange-50 rounded-lg">
+                <FiUser className="w-6 h-6 text-orange-600" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold">Get Started</h3>
+                <p className="text-gray-600 text-sm">Join as buyer or seller</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <hr className="border-t border-gray-200 w-4/5 mx-auto my-5" />
 
       {/* Features Grid */}
       <section className="py-24 bg-white">
@@ -74,7 +141,7 @@ export default function LandingPage() {
       </section>
 
       {/* How It Works */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-24 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-center mb-16">Your Path to Profitable Trading</h2>
           <div className="relative">
@@ -102,7 +169,7 @@ export default function LandingPage() {
                   <div className="md:absolute left-0 top-0 w-16 h-16 bg-black rounded-full flex items-center justify-center -translate-x-1/2">
                     <span className="text-white text-2xl font-bold">{index + 1}</span>
                   </div>
-                  <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+                  <div className="bg-white p-8 rounded-xl  border border-gray-100">
                     <h3 className="text-2xl font-semibold mb-4">{step.title}</h3>
                     <p className="text-gray-600">{step.desc}</p>
                   </div>
@@ -119,7 +186,7 @@ export default function LandingPage() {
           <h2 className="text-4xl font-bold text-white mb-8">Fuel Your Future Now</h2>
           <p className="text-blue-100 text-xl mb-12 max-w-2xl mx-auto">
             Over 5,000 fuel traders are already maximizing profits with FuelMarket. 
-            Don’t miss out - your next big deal is waiting!
+            Don't miss out - your next big deal is waiting!
           </p>
           <button className="bg-white text-black px-8 py-4 rounded-full hover:bg-gray-100 transition flex items-center mx-auto" onClick={e=>window.location.href="./auth/authenticate"}>
             Join Free Today <FiArrowRight className="ml-2" />
@@ -133,20 +200,19 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             <div>
               <h4 className="text-lg font-semibold mb-4">FuelMarket</h4>
-              <p className="text-gray-600">The world’s smartest fuel trading platform</p>
+              <p className="text-gray-600">The world's smartest fuel trading platform</p>
             </div>
             <div>
               <h4 className="text-lg font-semibold mb-4">Company</h4>
               <ul className="space-y-2">
                 <li><a href="./about" className="text-gray-600 hover:text-black">About Us</a></li>
-         
               </ul>
             </div>
             <div>
               <h4 className="text-lg font-semibold mb-4">Solutions</h4>
               <ul className="space-y-2">
                 <li><a href="./auth/buyer-register" className="text-gray-600 hover:text-black">Buy</a></li>
-                <li><a href="./auth/buyer-login" className="text-gray-600 hover:text-black">Sell</a></li>
+                <li><a href="./auth/seller-register" className="text-gray-600 hover:text-black">Sell</a></li>
               </ul>
             </div>
             <div>

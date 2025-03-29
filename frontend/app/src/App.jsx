@@ -10,6 +10,9 @@ import CustomerOrders from './pages/orders/customerOrders'
 import LandingPage from './pages/home'
 import RoleSelection from './pages/authentication/common'
 import { Navigate } from 'react-router-dom'
+import ContactPage from './pages/contact'
+import OurStoryPage from './pages/about'
+import FAQPage from './pages/faq'
 
 function App() {
 
@@ -81,6 +84,22 @@ function App() {
               <Navigate to="/auth/seller-login" replace />
             )
             } />
+
+
+            <Route
+            path='/contact'
+            element={<ContactPage/>}
+            />
+
+          <Route
+            path='/about'
+            element={<OurStoryPage/>}
+            />
+
+          <Route
+          path='/faq'
+          element={<FAQPage/>}
+          />
 
           
         </Routes>
