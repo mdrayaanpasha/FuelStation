@@ -62,10 +62,7 @@ Excellent question! Reasons include:
 
 ## 🚨 Known Issues
 
-- The "Buy Fuel" button might actually just order pizza  
-- Sometimes the database forgets it's supposed to work  
 - The code quality ranges from "questionable" to "what was I thinking"  
-- All error messages are sarcastic by design *(that's a feature, not a bug)*  
 
 ## 📜 License
 
