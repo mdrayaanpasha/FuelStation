@@ -7,13 +7,14 @@ connectDB();
 import cors from "cors"
 import BuyersAuth from "./routes/AuthenticationRoutes/BuyersAuthRoutes";
 import SellersAuth from "./routes/AuthenticationRoutes/SellersAuthRoutes";
+import OrderRoutes from "./routes/OrdersRoutes/OrdersRoute";
 
 
 app.use(express.json());
 app.use(cors())
 app.use("/api/auth/Buyers",BuyersAuth);
 app.use("/api/auth/Sellers",SellersAuth);
-// app.use("/api/orders",)
+app.use("/api/orders",OrderRoutes)
 
 
 app.listen(PORT, () => {

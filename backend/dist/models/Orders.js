@@ -51,6 +51,10 @@ const OrderSchema = new mongoose_1.Schema({
         required: true,
         min: 1,
     },
+    status: {
+        type: Boolean,
+        default: false, // false = Pending, true = Completed
+    },
 }, { timestamps: true });
 // Create Order Model
 const Order = mongoose_1.default.model("Order", OrderSchema);

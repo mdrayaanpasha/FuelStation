@@ -5,6 +5,9 @@ interface IOrder extends Document {
   buyer: mongoose.Types.ObjectId;
   seller: mongoose.Types.ObjectId;
   liters: number;
+  status: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 // Define Order Schema
@@ -24,6 +27,10 @@ const OrderSchema = new Schema<IOrder>(
       type: Number,
       required: true,
       min: 1,
+    },
+    status: { 
+      type: Boolean, 
+      default: false, // false = Pending, true = Completed
     },
   },
   { timestamps: true }

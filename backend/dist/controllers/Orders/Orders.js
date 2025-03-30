@@ -12,8 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteOrder = exports.getAllOrders = exports.getSellerOrders = exports.getBuyerOrders = exports.createOrder = void 0;
+exports.GetAllSellers = exports.deleteOrder = exports.getAllOrders = exports.updateOrderStatus = exports.getSellerOrders = exports.getBuyerOrders = exports.createOrder = void 0;
 const Orders_1 = __importDefault(require("../../models/Orders"));
+const sellerAuthentication_1 = __importDefault(require("../../models/sellerAuthentication"));
 // Create Order
 const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -44,13 +45,18 @@ const getBuyerOrders = (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
 });
 exports.getBuyerOrders = getBuyerOrders;
-// Get Orders by Seller
+// Get Orders by Seller (with buyer details)
 const getSellerOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { seller } = req.body;
+        console.log(seller);
         if (!seller)
             return res.status(400).json({ message: "Seller ID is required" });
-        const orders = yield Orders_1.default.find({ seller }).populate("buyer");
+        const orders = yield Orders_1.default.find({ seller })
+            .populate({
+            path: "buyer",
+            select: "name address phone", // Fetch specific buyer details
+        });
         res.status(200).json(orders);
     }
     catch (error) {
@@ -58,6 +64,21 @@ const getSellerOrders = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.getSellerOrders = getSellerOrders;
+const updateOrderStatus = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { orderId } = req.params;
+        const order = yield Orders_1.default.findById(orderId);
+        if (!order)
+            return res.status(404).json({ message: "Order not found" });
+        order.status = true; // Mark as completed
+        yield order.save();
+        res.status(200).json({ message: "Order updated successfully", order });
+    }
+    catch (error) {
+        res.status(500).json({ message: "Error updating order", error });
+    }
+});
+exports.updateOrderStatus = updateOrderStatus;
 // Get All Orders
 const getAllOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -83,3 +104,13 @@ const deleteOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.deleteOrder = deleteOrder;
+const GetAllSellers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const sellers = yield sellerAuthentication_1.default.find();
+        res.status(200).json(sellers);
+    }
+    catch (error) {
+        res.status(500).json({ message: "Error fetching all sellers", error });
+    }
+});
+exports.GetAllSellers = GetAllSellers;
