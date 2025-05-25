@@ -25,7 +25,7 @@ const BuyerRegister = () => {
     setMessage(null);
 
     try {
-      const response = await axios.post("http://localhost:3000/api/auth/Buyers/register", formData);
+      const response = await axios.post("https://fuel-station-j9n7.vercel.app/api/auth/Buyers/register", formData);
       localStorage.setItem("Buyertoken", response.data.token);
       localStorage.removeItem("sellerToken");
 
@@ -59,11 +59,10 @@ const BuyerRegister = () => {
             <h2 className="text-3xl font-bold text-gray-900 mb-8">Buyer Registration</h2>
 
             {message && (
-              <div className={`p-4 rounded-lg mb-6 ${
-                message.type === 'success' 
-                  ? 'bg-green-100 text-green-800'
-                  : 'bg-red-100 text-red-800'
-              }`}>
+              <div className={`p-4 rounded-lg mb-6 ${message.type === 'success'
+                ? 'bg-green-100 text-green-800'
+                : 'bg-red-100 text-red-800'
+                }`}>
                 {message.content}
               </div>
             )}

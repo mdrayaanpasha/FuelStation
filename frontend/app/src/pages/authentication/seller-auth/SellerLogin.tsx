@@ -23,11 +23,11 @@ const SellerLogin = () => {
     setMessage(null);
 
     try {
-      const response = await axios.post("http://localhost:3000/api/auth/Sellers/login", loginData);
+      const response = await axios.post("https://fuel-station-j9n7.vercel.app/api/auth/Sellers/login", loginData);
       setMessage({ type: 'success', content: response.data.message });
       localStorage.removeItem("buyerToken");
       localStorage.setItem("sellerToken", response.data.token);
-      
+
       setTimeout(() => {
         window.location.href = "/";
       }, 1500);
@@ -64,8 +64,8 @@ const SellerLogin = () => {
                 <Link to="/" className="text-2xl font-bold text-gray-900">
                   FuelMarket
                 </Link>
-                <Link 
-                  to="/auth/seller-register" 
+                <Link
+                  to="/auth/seller-register"
                   className="text-gray-900 hover:bg-gray-50 px-4 py-2 rounded-lg transition"
                 >
                   Create Account
@@ -75,11 +75,10 @@ const SellerLogin = () => {
               <h3 className="text-3xl font-bold text-gray-900 mb-8">Seller Login</h3>
 
               {message && (
-                <div className={`p-4 rounded-lg mb-6 ${
-                  message.type === 'success' 
-                    ? 'bg-green-100 text-green-800'
-                    : 'bg-red-100 text-red-800'
-                }`}>
+                <div className={`p-4 rounded-lg mb-6 ${message.type === 'success'
+                  ? 'bg-green-100 text-green-800'
+                  : 'bg-red-100 text-red-800'
+                  }`}>
                   {message.content}
                 </div>
               )}
@@ -118,7 +117,7 @@ const SellerLogin = () => {
                   Login to Dashboard
                 </button>
 
-              
+
               </form>
             </div>
           </div>

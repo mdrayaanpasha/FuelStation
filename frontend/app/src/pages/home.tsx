@@ -3,7 +3,7 @@ import { FiArrowRight, FiCheck, FiDollarSign, FiTruck, FiShield, FiPercent, FiCl
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white">
- 
+
       {/* Navigation */}
       <nav className="sticky top-0 bg-white/80 backdrop-blur-md border-b z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -19,9 +19,9 @@ export default function LandingPage() {
               </div>
             </div>
             {!localStorage.getItem('buyertoken') && !localStorage.getItem("sellerToken") && (
-            <button className="bg-black text-white px-6 py-2 rounded-full hover:bg-blue-700 transition" onClick={e=>window.location.href="./auth/authenticate"}>
-              Sign In
-            </button>
+              <button className="bg-black text-white px-6 py-2 rounded-full hover:bg-blue-700 transition" onClick={e => window.location.href = "./auth/authenticate"}>
+                Sign In
+              </button>
             )}
           </div>
         </div>
@@ -38,11 +38,11 @@ export default function LandingPage() {
               </span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Join the ultimate fuel trading hub. Connect instantly with verified buyers and sellers worldwide. 
+              Join the ultimate fuel trading hub. Connect instantly with verified buyers and sellers worldwide.
               Get unbeatable prices, ironclad security, and lightning-fast settlements.
             </p>
             <div className="flex justify-center gap-4">
-              <button className="bg-black text-white px-8 py-4 rounded-full hover:bg-gray-700 transition flex items-center" onClick={e=>window.location.href="./auth/authenticate"}>
+              <button className="bg-black text-white px-8 py-4 rounded-full hover:bg-gray-700 transition flex items-center" onClick={e => window.location.href = "./auth/authenticate"}>
                 Start Trading Now <FiArrowRight className="ml-2" />
               </button>
             </div>
@@ -56,8 +56,8 @@ export default function LandingPage() {
           <h2 className="text-3xl font-bold text-center mb-12">Quick Access</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Buyer Links */}
-            <a 
-              href="./order" 
+            <a
+              href="./order"
               className="bg-white p-6 rounded-xl border border-gray-100 hover:border-gray-300 transition-all flex items-center gap-4"
             >
               <div className="p-3 bg-blue-50 rounded-lg">
@@ -69,8 +69,8 @@ export default function LandingPage() {
               </div>
             </a>
 
-            <a 
-              href="./myorders" 
+            <a
+              href="./myorders"
               className="bg-white p-6 rounded-xl border border-gray-100 hover:border-gray-300 transition-all flex items-center gap-4"
             >
               <div className="p-3 bg-green-50 rounded-lg">
@@ -85,8 +85,8 @@ export default function LandingPage() {
 
 
             {/* Seller Links */}
-            <a 
-              href="./customer-orders" 
+            <a
+              href="./customer-orders"
               className="bg-white p-6 rounded-xl border border-gray-100 hover:border-gray-300 transition-all flex items-center gap-4"
             >
               <div className="p-3 bg-purple-50 rounded-lg">
@@ -99,8 +99,8 @@ export default function LandingPage() {
             </a>
 
             {/* Auth Links */}
-            <a 
-              href="./auth/authenticate" 
+            <a
+              href="./auth/authenticate"
               className="bg-white p-6 rounded-xl border border-gray-100 hover:border-gray-300 transition-all flex items-center gap-4"
             >
               <div className="p-3 bg-orange-50 rounded-lg">
@@ -185,10 +185,10 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
           <h2 className="text-4xl font-bold text-white mb-8">Fuel Your Future Now</h2>
           <p className="text-blue-100 text-xl mb-12 max-w-2xl mx-auto">
-            Over 5,000 fuel traders are already maximizing profits with FuelMarket. 
+            Over 5,000 fuel traders are already maximizing profits with FuelMarket.
             Don't miss out - your next big deal is waiting!
           </p>
-          <button className="bg-white text-black px-8 py-4 rounded-full hover:bg-gray-100 transition flex items-center mx-auto" onClick={e=>window.location.href="./auth/authenticate"}>
+          <button className="bg-white text-black px-8 py-4 rounded-full hover:bg-gray-100 transition flex items-center mx-auto" onClick={e => window.location.href = "./auth/authenticate"}>
             Join Free Today <FiArrowRight className="ml-2" />
           </button>
         </div>

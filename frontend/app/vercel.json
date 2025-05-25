@@ -1,0 +1,56 @@
+{
+    "routes": [
+        {
+            "src": "/",
+            "dest": "/"
+        },
+        {
+            "src": "/auth/seller-login",
+            "dest": "/"
+        },
+        {
+            "src": "/auth/seller-register",
+            "dest": "/"
+        },
+        {
+            "src": "/auth/buyer-register",
+            "dest": "/"
+        },
+        {
+            "src": "/auth/buyer-login",
+            "dest": "/"
+        },
+        {
+            "src": "/reset-password/:token",
+            "dest": "/"
+        },
+        {
+            "src": "/order",
+            "dest": "/"
+        },
+        {
+            "src": "/auth/authenticate",
+            "dest": "/"
+        },
+        {
+            "src": "/myorders",
+            "dest": "/"
+        },
+        {
+            "src": "/customer-orders",
+            "dest": "/"
+        },
+        {
+            "src": "/about",
+            "dest": "/"
+        },
+        {
+            "src": "/contact",
+            "dest": "/"
+        },
+        {
+            "src": "/faq",
+            "dest": "/"
+        }
+    ]
+}

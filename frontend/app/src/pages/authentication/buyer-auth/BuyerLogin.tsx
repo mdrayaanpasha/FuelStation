@@ -25,9 +25,9 @@ const BuyerAuth = () => {
     e.preventDefault();
     setMessage(null);
 
-    const endpoint = isLogin 
-      ? "http://localhost:3000/api/auth/Buyers/login"
-      : "http://localhost:3000/api/auth/Buyer/signup";
+    const endpoint = isLogin
+      ? "https://fuel-station-j9n7.vercel.app/api/auth/Buyers/login"
+      : "https://fuel-station-j9n7.vercel.app/api/auth/Buyer/signup";
 
     try {
       const response = await axios.post(endpoint, formData);
@@ -35,11 +35,11 @@ const BuyerAuth = () => {
       localStorage.removeItem("sellerToken");
 
       setMessage({ type: 'success', content: response.data.message });
-      
+
       setTimeout(() => {
         navigate("/");
       }, 1500);
-      
+
     } catch (error: any) {
       setMessage({
         type: 'error',
@@ -60,7 +60,7 @@ const BuyerAuth = () => {
                   {isLogin ? "Welcome Back!" : "Join FuelMarket"}
                 </h2>
                 <p className="text-lg opacity-90">
-                  {isLogin 
+                  {isLogin
                     ? "Access the best fuel deals from verified sellers worldwide."
                     : "Create your account and start trading fuel efficiently."}
                 </p>
@@ -77,7 +77,7 @@ const BuyerAuth = () => {
                   FuelMarket
                 </Link>
                 <button
-                  onClick={() => window.location.href="./buyer-register"}
+                  onClick={() => window.location.href = "./buyer-register"}
                   className="text-gray-900 hover:bg-gray-50 px-4 py-2 rounded-lg transition"
                 >
                   {isLogin ? "Create Account" : "Already have an account?"}
@@ -89,11 +89,10 @@ const BuyerAuth = () => {
               </h3>
 
               {message && (
-                <div className={`p-4 rounded-lg mb-6 ${
-                  message.type === 'success' 
-                    ? 'bg-green-100 text-green-800'
-                    : 'bg-red-100 text-red-800'
-                }`}>
+                <div className={`p-4 rounded-lg mb-6 ${message.type === 'success'
+                  ? 'bg-green-100 text-green-800'
+                  : 'bg-red-100 text-red-800'
+                  }`}>
                   {message.content}
                 </div>
               )}
@@ -154,17 +153,17 @@ const BuyerAuth = () => {
 
                 <button
                   type="submit"
-                  onClick={e=>handleSubmit(e)}
+                  onClick={e => handleSubmit(e)}
                   className="w-full bg-gradient-to-br from-gray-900 to-gray-800 text-white py-4 px-6 rounded-lg font-semibold hover:opacity-90 transition-opacity"
                 >
                   {isLogin ? "Sign In" : "Create Account"}
                 </button>
 
-             
 
-               
 
-                
+
+
+
               </form>
             </div>
           </div>
