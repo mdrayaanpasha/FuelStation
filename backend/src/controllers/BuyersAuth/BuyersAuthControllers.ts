@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Buyer from "../../models/buyersAuthentication"
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 import dotenv from "dotenv";

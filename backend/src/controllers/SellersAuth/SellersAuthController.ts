@@ -1,5 +1,5 @@
 import Seller from "../../models/sellerAuthentication"; // ✅ Corrected import path
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
 import dotenv from "dotenv";
@@ -37,24 +37,24 @@ export const registerSeller = async (req: Request, res: Response): Promise<any> 
 
 
 export const loginSeller = async (req: Request, res: Response): Promise<any> => {
-    const {email,password} = req.body;
-    try {
-        const UserData = await Seller.findOne({ email });
-        if (!UserData) return res.status(400).json({ message: "Seller does not exist" });
-    
-        // ✅ Fixed password comparison
-        const isMatch = await bcrypt.compare(password, UserData.password);
-        if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
-    
-        if (!process.env.JWT_SECRET) {
-          throw new Error("JWT_SECRET is missing in environment variables");
-        }
-        const JWT_SECRET = process.env.JWT_SECRET as string;
-    
-        const token = jwt.sign({ id: UserData._id }, JWT_SECRET, { expiresIn: "1h" });
-    
-        res.status(200).json({ message: "Seller logged in successfully", token });
-      } catch (error) {
-        res.status(500).json({ message: "Server error", error });
-      }
+  const { email, password } = req.body;
+  try {
+    const UserData = await Seller.findOne({ email });
+    if (!UserData) return res.status(400).json({ message: "Seller does not exist" });
+
+    // ✅ Fixed password comparison
+    const isMatch = await bcrypt.compare(password, UserData.password);
+    if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
+
+    if (!process.env.JWT_SECRET) {
+      throw new Error("JWT_SECRET is missing in environment variables");
+    }
+    const JWT_SECRET = process.env.JWT_SECRET as string;
+
+    const token = jwt.sign({ id: UserData._id }, JWT_SECRET, { expiresIn: "1h" });
+
+    res.status(200).json({ message: "Seller logged in successfully", token });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
 };
